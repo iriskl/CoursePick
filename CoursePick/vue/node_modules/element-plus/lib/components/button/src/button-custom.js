@@ -17,8 +17,12 @@ function useButtonCustomStyle(props) {
   const ns = index.useNamespace("button");
   return vue.computed(() => {
     let styles = {};
-    const buttonColor = props.color;
+    let buttonColor = props.color;
     if (buttonColor) {
+      const match = buttonColor.match(/var\((.*?)\)/);
+      if (match) {
+        buttonColor = window.getComputedStyle(window.document.documentElement).getPropertyValue(match[1]);
+      }
       const color = new tinycolor.TinyColor(buttonColor);
       const activeBgColor = props.dark ? color.tint(20).toString() : darken(color, 20);
       if (props.plain) {

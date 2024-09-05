@@ -91,7 +91,7 @@ function useRender(props) {
           }
         }
       }
-      const baseKey = `${$index},${cellIndex}`;
+      const baseKey = `${getKeyOfRow(row, $index)},${cellIndex}`;
       const patchKey = columnData.columnKey || columnData.rawColumnKey || "";
       const tdChildren = cellChildren(cellIndex, column, data);
       const mergedTooltipOptions = column.showOverflowTooltip && merge({

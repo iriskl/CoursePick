@@ -57,5 +57,5 @@ const formEmits = {
   validate: (prop, isValid, message) => (isArray(prop) || isString(prop)) && isBoolean(isValid) && isString(message)
 };
 
-export { formEmits, formProps };
+export { formEmits, formMetaProps, formProps };
 //# sourceMappingURL=form.mjs.map

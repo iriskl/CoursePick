@@ -10,10 +10,7 @@ const breadcrumbItemProps = runtime.buildProps({
     type: runtime.definePropType([String, Object]),
     default: ""
   },
-  replace: {
-    type: Boolean,
-    default: false
-  }
+  replace: Boolean
 });
 
 exports.breadcrumbItemProps = breadcrumbItemProps;

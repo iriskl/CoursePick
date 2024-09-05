@@ -152,7 +152,7 @@ const treeEmits = {
   [CURRENT_CHANGE]: (data, node) => data && node,
   [NODE_CHECK]: (data, checkedInfo) => data && checkedInfo,
   [NODE_CHECK_CHANGE]: (data, checked) => data && typeof checked === "boolean",
-  [NODE_CONTEXTMENU]: (event, data, node) => event && data && node
+  [NODE_CONTEXTMENU]: (evt, data, node) => evt && data && node
 };
 const treeNodeEmits = {
   click: (node, e) => !!(node && e),

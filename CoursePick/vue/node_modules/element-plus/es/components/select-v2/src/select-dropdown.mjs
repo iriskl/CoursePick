@@ -18,6 +18,7 @@ import DynamicSizeList from '../../virtual-list/src/components/dynamic-size-list
 var ElSelectMenu = defineComponent({
   name: "ElSelectDropdown",
   props: {
+    loading: Boolean,
     data: {
       type: Array,
       required: true
@@ -41,7 +42,7 @@ var ElSelectMenu = defineComponent({
     const size = computed(() => props.data.length);
     watch(() => size.value, () => {
       var _a, _b;
-      (_b = (_a = select.popper.value).updatePopper) == null ? void 0 : _b.call(_a);
+      (_b = (_a = select.tooltipRef.value).updatePopper) == null ? void 0 : _b.call(_a);
     });
     const isSized = computed(() => isUndefined(select.props.estimatedOptionHeight));
     const listProps = computed(() => {
@@ -207,7 +208,7 @@ var ElSelectMenu = defineComponent({
       }
     };
     return () => {
-      var _a;
+      var _a, _b, _c, _d;
       const {
         data,
         width
@@ -217,18 +218,13 @@ var ElSelectMenu = defineComponent({
         multiple,
         scrollbarAlwaysOn
       } = select.props;
-      if (data.length === 0) {
-        return createVNode("div", {
-          "class": ns.b("dropdown"),
-          "style": {
-            width: `${width}px`
-          }
-        }, [(_a = slots.empty) == null ? void 0 : _a.call(slots)]);
-      }
       const List = unref(isSized) ? FixedSizeList : DynamicSizeList;
       return createVNode("div", {
-        "class": [ns.b("dropdown"), ns.is("multiple", multiple)]
-      }, [createVNode(List, mergeProps({
+        "class": [ns.b("dropdown"), ns.is("multiple", multiple)],
+        "style": {
+          width: `${width}px`
+        }
+      }, [(_a = slots.header) == null ? void 0 : _a.call(slots), ((_b = slots.loading) == null ? void 0 : _b.call(slots)) || ((_c = slots.empty) == null ? void 0 : _c.call(slots)) || createVNode(List, mergeProps({
         "ref": listRef
       }, unref(listProps), {
         "className": ns.be("dropdown", "list"),
@@ -240,7 +236,7 @@ var ElSelectMenu = defineComponent({
         "onKeydown": onKeydown
       }), {
         default: (props2) => createVNode(Item, props2, null)
-      })]);
+      }), (_d = slots.footer) == null ? void 0 : _d.call(slots)]);
     };
   }
 });

@@ -3,7 +3,6 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
-var reactivity = require('@vue/reactivity');
 require('../../utils/index.js');
 var index = require('../use-namespace/index.js');
 var error = require('../../utils/error.js');
@@ -16,7 +15,7 @@ const useLockscreen = (trigger, options = {}) => {
     error.throwError("[useLockscreen]", "You need to pass a ref param to this function");
   }
   const ns = options.ns || index.useNamespace("popup");
-  const hiddenCls = reactivity.computed(() => ns.bm("parent", "hidden"));
+  const hiddenCls = vue.computed(() => ns.bm("parent", "hidden"));
   if (!core.isClient || style.hasClass(document.body, hiddenCls.value)) {
     return;
   }

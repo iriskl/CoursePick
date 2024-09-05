@@ -10,7 +10,6 @@ require('../../../constants/index.js');
 var index = require('../../../hooks/use-locale/index.js');
 var event = require('../../../constants/event.js');
 var error = require('../../../utils/error.js');
-var index$1 = require('../../../hooks/use-deprecated/index.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -40,7 +39,6 @@ const threeConsecutiveMonth = (start, end) => {
   ];
 };
 const useCalendar = (props, emit, componentName) => {
-  const slots = vue.useSlots();
   const { lang } = index.useLocale();
   const selectedDay = vue.ref();
   const now = dayjs__default["default"]().locale(lang.value);
@@ -121,14 +119,6 @@ const useCalendar = (props, emit, componentName) => {
       pickDay(day);
     }
   };
-  index$1.useDeprecated({
-    from: '"dateCell"',
-    replacement: '"date-cell"',
-    scope: "ElCalendar",
-    version: "2.3.0",
-    ref: "https://element-plus.org/en-US/component/calendar.html#slots",
-    type: "Slot"
-  }, vue.computed(() => !!slots.dateCell));
   return {
     calculateValidatedDateRange,
     date,

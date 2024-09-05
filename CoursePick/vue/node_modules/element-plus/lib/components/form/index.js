@@ -20,6 +20,7 @@ const ElForm = install.withInstall(form$1["default"], {
 const ElFormItem = install.withNoopInstall(formItem$1["default"]);
 
 exports.formEmits = form.formEmits;
+exports.formMetaProps = form.formMetaProps;
 exports.formProps = form.formProps;
 exports.formItemProps = formItem.formItemProps;
 exports.formItemValidateStates = formItem.formItemValidateStates;

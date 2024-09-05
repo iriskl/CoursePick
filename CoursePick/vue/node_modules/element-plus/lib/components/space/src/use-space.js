@@ -20,19 +20,18 @@ function useSpace(props) {
   const horizontalSize = vue.ref(0);
   const verticalSize = vue.ref(0);
   const containerStyle = vue.computed(() => {
-    const wrapKls = props.wrap || props.fill ? { flexWrap: "wrap", marginBottom: `-${verticalSize.value}px` } : {};
+    const wrapKls = props.wrap || props.fill ? { flexWrap: "wrap" } : {};
     const alignment = {
       alignItems: props.alignment
     };
-    return [wrapKls, alignment, props.style];
+    const gap = {
+      rowGap: `${verticalSize.value}px`,
+      columnGap: `${horizontalSize.value}px`
+    };
+    return [wrapKls, alignment, gap, props.style];
   });
   const itemStyle = vue.computed(() => {
-    const itemBaseStyle = {
-      paddingBottom: `${verticalSize.value}px`,
-      marginRight: `${horizontalSize.value}px`
-    };
-    const fillStyle = props.fill ? { flexGrow: 1, minWidth: `${props.fillRatio}%` } : {};
-    return [itemBaseStyle, fillStyle];
+    return props.fill ? { flexGrow: 1, minWidth: `${props.fillRatio}%` } : {};
   });
   vue.watchEffect(() => {
     const { size = "small", wrap, direction: dir, fill } = props;

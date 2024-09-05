@@ -22,6 +22,7 @@ var dynamicSizeList = require('../../virtual-list/src/components/dynamic-size-li
 var ElSelectMenu = vue.defineComponent({
   name: "ElSelectDropdown",
   props: {
+    loading: Boolean,
     data: {
       type: Array,
       required: true
@@ -45,7 +46,7 @@ var ElSelectMenu = vue.defineComponent({
     const size = vue.computed(() => props.data.length);
     vue.watch(() => size.value, () => {
       var _a, _b;
-      (_b = (_a = select.popper.value).updatePopper) == null ? void 0 : _b.call(_a);
+      (_b = (_a = select.tooltipRef.value).updatePopper) == null ? void 0 : _b.call(_a);
     });
     const isSized = vue.computed(() => types.isUndefined(select.props.estimatedOptionHeight));
     const listProps = vue.computed(() => {
@@ -211,7 +212,7 @@ var ElSelectMenu = vue.defineComponent({
       }
     };
     return () => {
-      var _a;
+      var _a, _b, _c, _d;
       const {
         data,
         width
@@ -221,18 +222,13 @@ var ElSelectMenu = vue.defineComponent({
         multiple,
         scrollbarAlwaysOn
       } = select.props;
-      if (data.length === 0) {
-        return vue.createVNode("div", {
-          "class": ns.b("dropdown"),
-          "style": {
-            width: `${width}px`
-          }
-        }, [(_a = slots.empty) == null ? void 0 : _a.call(slots)]);
-      }
       const List = vue.unref(isSized) ? fixedSizeList["default"] : dynamicSizeList["default"];
       return vue.createVNode("div", {
-        "class": [ns.b("dropdown"), ns.is("multiple", multiple)]
-      }, [vue.createVNode(List, vue.mergeProps({
+        "class": [ns.b("dropdown"), ns.is("multiple", multiple)],
+        "style": {
+          width: `${width}px`
+        }
+      }, [(_a = slots.header) == null ? void 0 : _a.call(slots), ((_b = slots.loading) == null ? void 0 : _b.call(slots)) || ((_c = slots.empty) == null ? void 0 : _c.call(slots)) || vue.createVNode(List, vue.mergeProps({
         "ref": listRef
       }, vue.unref(listProps), {
         "className": ns.be("dropdown", "list"),
@@ -244,7 +240,7 @@ var ElSelectMenu = vue.defineComponent({
         "onKeydown": onKeydown
       }), {
         default: (props2) => vue.createVNode(Item, props2, null)
-      })]);
+      }), (_d = slots.footer) == null ? void 0 : _d.call(slots)]);
     };
   }
 });

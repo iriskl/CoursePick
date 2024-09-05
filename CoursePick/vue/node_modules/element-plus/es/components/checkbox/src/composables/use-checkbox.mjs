@@ -1,22 +1,16 @@
+import { computed } from 'vue';
 import '../../../form/index.mjs';
 import '../../../../utils/index.mjs';
+import '../../../../hooks/index.mjs';
 import { useCheckboxDisabled } from './use-checkbox-disabled.mjs';
 import { useCheckboxEvent } from './use-checkbox-event.mjs';
 import { useCheckboxModel } from './use-checkbox-model.mjs';
 import { useCheckboxStatus } from './use-checkbox-status.mjs';
-import { isArray } from '@vue/shared';
 import { useFormItem, useFormItemInputId } from '../../../form/src/hooks/use-form-item.mjs';
+import { isArray } from '@vue/shared';
+import { useDeprecated } from '../../../../hooks/use-deprecated/index.mjs';
+import { isPropAbsent } from '../../../../utils/types.mjs';
 
-const setStoreValue = (props, { model }) => {
-  function addToStore() {
-    if (isArray(model.value) && !model.value.includes(props.label)) {
-      model.value.push(props.label);
-    } else {
-      model.value = props.trueLabel || true;
-    }
-  }
-  props.checked && addToStore();
-};
 const useCheckbox = (props, slots) => {
   const { formItem: elFormItem } = useFormItem();
   const { model, isGroup, isLimitExceeded } = useCheckboxModel(props);
@@ -25,7 +19,8 @@ const useCheckbox = (props, slots) => {
     isChecked,
     checkboxButtonSize,
     checkboxSize,
-    hasOwnLabel
+    hasOwnLabel,
+    actualValue
   } = useCheckboxStatus(props, slots, { model });
   const { isDisabled } = useCheckboxDisabled({ model, isChecked });
   const { inputId, isLabeledByFormItem } = useFormItemInputId(props, {
@@ -40,7 +35,39 @@ const useCheckbox = (props, slots) => {
     isDisabled,
     isLabeledByFormItem
   });
-  setStoreValue(props, { model });
+  const setStoreValue = () => {
+    function addToStore() {
+      var _a, _b;
+      if (isArray(model.value) && !model.value.includes(actualValue.value)) {
+        model.value.push(actualValue.value);
+      } else {
+        model.value = (_b = (_a = props.trueValue) != null ? _a : props.trueLabel) != null ? _b : true;
+      }
+    }
+    props.checked && addToStore();
+  };
+  setStoreValue();
+  useDeprecated({
+    from: "label act as value",
+    replacement: "value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => isGroup.value && isPropAbsent(props.value)));
+  useDeprecated({
+    from: "true-label",
+    replacement: "true-value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => !!props.trueLabel));
+  useDeprecated({
+    from: "false-label",
+    replacement: "false-value",
+    version: "3.0.0",
+    scope: "el-checkbox",
+    ref: "https://element-plus.org/en-US/component/checkbox.html"
+  }, computed(() => !!props.falseLabel));
   return {
     inputId,
     isLabeledByFormItem,
@@ -51,6 +78,7 @@ const useCheckbox = (props, slots) => {
     checkboxSize,
     hasOwnLabel,
     model,
+    actualValue,
     handleChange,
     onClickRoot
   };

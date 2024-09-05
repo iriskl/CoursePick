@@ -21,6 +21,9 @@ const isStringNumber = (val) => {
   }
   return !Number.isNaN(Number(val));
 };
+const isWindow = (val) => {
+  return val === window;
+};
 
-export { isBoolean, isElement, isEmpty, isNumber, isPropAbsent, isStringNumber, isUndefined };
+export { isBoolean, isElement, isEmpty, isNumber, isPropAbsent, isStringNumber, isUndefined, isWindow };
 //# sourceMappingURL=types.mjs.map

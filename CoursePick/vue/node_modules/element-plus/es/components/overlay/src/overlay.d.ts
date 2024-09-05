@@ -2,7 +2,7 @@ import type { ExtractPropTypes } from 'vue';
 import type { ZIndexProperty } from 'csstype';
 export declare const overlayProps: {
     readonly mask: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly customMaskEvent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly customMaskEvent: BooleanConstructor;
     readonly overlayClass: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>) | ((new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>))[], unknown, unknown>>;
         readonly required: false;
@@ -23,7 +23,7 @@ export declare const overlayEmits: {
 export declare type OverlayEmits = typeof overlayEmits;
 declare const _default: import("vue").DefineComponent<{
     readonly mask: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly customMaskEvent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly customMaskEvent: BooleanConstructor;
     readonly overlayClass: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>) | ((new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>))[], unknown, unknown>>;
         readonly required: false;
@@ -42,7 +42,7 @@ declare const _default: import("vue").DefineComponent<{
     click: (evt: MouseEvent) => boolean;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
     readonly mask: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, true, boolean>;
-    readonly customMaskEvent: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, false, boolean>;
+    readonly customMaskEvent: BooleanConstructor;
     readonly overlayClass: {
         readonly type: import("vue").PropType<import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>) | ((new (...args: any[]) => (string | string[] | Record<string, boolean>) & {}) | (() => string | string[] | Record<string, boolean>))[], unknown, unknown>>;
         readonly required: false;
@@ -59,6 +59,6 @@ declare const _default: import("vue").DefineComponent<{
     onClick?: ((evt: MouseEvent) => any) | undefined;
 }, {
     readonly mask: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
-    readonly customMaskEvent: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
+    readonly customMaskEvent: boolean;
 }>;
 export default _default;

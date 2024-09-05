@@ -40,6 +40,9 @@ const imageViewerProps = runtime.buildProps({
   maxScale: {
     type: Number,
     default: 7
+  },
+  crossorigin: {
+    type: runtime.definePropType(String)
   }
 });
 const imageViewerEmits = {

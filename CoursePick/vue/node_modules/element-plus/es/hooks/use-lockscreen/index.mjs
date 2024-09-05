@@ -1,5 +1,4 @@
-import { isRef, watch, onScopeDispose } from 'vue';
-import { computed } from '@vue/reactivity';
+import { isRef, computed, watch, onScopeDispose } from 'vue';
 import '../../utils/index.mjs';
 import { useNamespace } from '../use-namespace/index.mjs';
 import { throwError } from '../../utils/error.mjs';

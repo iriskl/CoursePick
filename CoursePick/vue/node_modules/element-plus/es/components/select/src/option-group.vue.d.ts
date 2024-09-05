@@ -8,7 +8,8 @@ declare const _default: import("vue").DefineComponent<{
      */
     disabled: BooleanConstructor;
 }, {
-    visible: import("vue").Ref<boolean>;
+    groupRef: import("vue").Ref<null>;
+    visible: import("vue").ComputedRef<boolean>;
     ns: {
         namespace: import("vue").ComputedRef<string>;
         b: (blockSuffix?: string) => string;

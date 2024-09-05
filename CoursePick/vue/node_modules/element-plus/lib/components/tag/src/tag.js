@@ -10,20 +10,16 @@ var size = require('../../../constants/size.js');
 const tagProps = runtime.buildProps({
   type: {
     type: String,
-    values: ["success", "info", "warning", "danger", ""],
-    default: ""
+    values: ["primary", "success", "info", "warning", "danger"],
+    default: "primary"
   },
   closable: Boolean,
   disableTransitions: Boolean,
   hit: Boolean,
-  color: {
-    type: String,
-    default: ""
-  },
+  color: String,
   size: {
     type: String,
-    values: size.componentSizes,
-    default: ""
+    values: size.componentSizes
   },
   effect: {
     type: String,

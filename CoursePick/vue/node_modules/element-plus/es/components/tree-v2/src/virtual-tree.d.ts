@@ -95,7 +95,7 @@ export declare const treeEmits: {
     "current-change": (data: TreeNodeData, node: TreeNode) => TreeNode;
     check: (data: TreeNodeData, checkedInfo: CheckedInfo) => CheckedInfo;
     "check-change": (data: TreeNodeData, checked: boolean) => boolean;
-    "node-contextmenu": (event: Event, data: TreeNodeData, node: TreeNode) => TreeNode;
+    "node-contextmenu": (evt: Event, data: TreeNodeData, node: TreeNode) => TreeNode;
 };
 export declare const treeNodeEmits: {
     click: (node: TreeNode, e: MouseEvent) => boolean;

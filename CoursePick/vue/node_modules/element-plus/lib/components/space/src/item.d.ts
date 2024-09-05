@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-declare const spaceItemProps: {
+export declare const spaceItemProps: {
     readonly prefixCls: {
         readonly type: import("vue").PropType<string>;
         readonly required: false;

@@ -1,16 +1,21 @@
 import { inject, ref, computed, unref } from 'vue';
 import '../../../hooks/index.mjs';
-import '../../../utils/index.mjs';
 import { collapseContextKey } from './constants.mjs';
-import { generateId } from '../../../utils/rand.mjs';
 import { useNamespace } from '../../../hooks/use-namespace/index.mjs';
+import { useIdInjection } from '../../../hooks/use-id/index.mjs';
 
 const useCollapseItem = (props) => {
   const collapse = inject(collapseContextKey);
+  const { namespace } = useNamespace("collapse");
   const focusing = ref(false);
   const isClick = ref(false);
-  const id = ref(generateId());
-  const isActive = computed(() => collapse == null ? void 0 : collapse.activeNames.value.includes(props.name));
+  const idInjection = useIdInjection();
+  const id = computed(() => idInjection.current++);
+  const name = computed(() => {
+    var _a;
+    return (_a = props.name) != null ? _a : `${namespace.value}-id-${idInjection.prefix}-${unref(id)}`;
+  });
+  const isActive = computed(() => collapse == null ? void 0 : collapse.activeNames.value.includes(unref(name)));
   const handleFocus = () => {
     setTimeout(() => {
       if (!isClick.value) {
@@ -23,12 +28,12 @@ const useCollapseItem = (props) => {
   const handleHeaderClick = () => {
     if (props.disabled)
       return;
-    collapse == null ? void 0 : collapse.handleItemClick(props.name);
+    collapse == null ? void 0 : collapse.handleItemClick(unref(name));
     focusing.value = false;
     isClick.value = true;
   };
   const handleEnterClick = () => {
-    collapse == null ? void 0 : collapse.handleItemClick(props.name);
+    collapse == null ? void 0 : collapse.handleItemClick(unref(name));
   };
   return {
     focusing,

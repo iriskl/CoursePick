@@ -1,7 +1,7 @@
 import type { CollapseItemProps } from './collapse-item';
 export declare const useCollapseItem: (props: CollapseItemProps) => {
     focusing: import("vue").Ref<boolean>;
-    id: import("vue").Ref<number>;
+    id: import("vue").ComputedRef<number>;
     isActive: import("vue").ComputedRef<boolean | undefined>;
     handleFocus: () => void;
     handleHeaderClick: () => void;

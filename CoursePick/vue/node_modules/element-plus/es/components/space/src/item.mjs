@@ -19,5 +19,5 @@ const SpaceItem = defineComponent({
   }
 });
 
-export { SpaceItem as default };
+export { SpaceItem as default, spaceItemProps };
 //# sourceMappingURL=item.mjs.map

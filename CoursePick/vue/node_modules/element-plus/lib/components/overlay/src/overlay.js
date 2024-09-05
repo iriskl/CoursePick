@@ -15,10 +15,7 @@ const overlayProps = runtime.buildProps({
     type: Boolean,
     default: true
   },
-  customMaskEvent: {
-    type: Boolean,
-    default: false
-  },
+  customMaskEvent: Boolean,
   overlayClass: {
     type: runtime.definePropType([
       String,

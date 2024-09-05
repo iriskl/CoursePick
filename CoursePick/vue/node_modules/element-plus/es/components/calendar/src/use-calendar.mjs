@@ -1,4 +1,4 @@
-import { useSlots, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import dayjs from 'dayjs';
 import '../../../hooks/index.mjs';
 import '../../../utils/index.mjs';
@@ -6,7 +6,6 @@ import '../../../constants/index.mjs';
 import { useLocale } from '../../../hooks/use-locale/index.mjs';
 import { INPUT_EVENT, UPDATE_MODEL_EVENT } from '../../../constants/event.mjs';
 import { debugWarn } from '../../../utils/error.mjs';
-import { useDeprecated } from '../../../hooks/use-deprecated/index.mjs';
 
 const adjacentMonth = (start, end) => {
   const firstMonthLastDay = start.endOf("month");
@@ -32,7 +31,6 @@ const threeConsecutiveMonth = (start, end) => {
   ];
 };
 const useCalendar = (props, emit, componentName) => {
-  const slots = useSlots();
   const { lang } = useLocale();
   const selectedDay = ref();
   const now = dayjs().locale(lang.value);
@@ -113,14 +111,6 @@ const useCalendar = (props, emit, componentName) => {
       pickDay(day);
     }
   };
-  useDeprecated({
-    from: '"dateCell"',
-    replacement: '"date-cell"',
-    scope: "ElCalendar",
-    version: "2.3.0",
-    ref: "https://element-plus.org/en-US/component/calendar.html#slots",
-    type: "Slot"
-  }, computed(() => !!slots.dateCell));
   return {
     calculateValidatedDateRange,
     date,

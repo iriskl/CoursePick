@@ -62,5 +62,6 @@ const formEmits = {
 };
 
 exports.formEmits = formEmits;
+exports.formMetaProps = formMetaProps;
 exports.formProps = formProps;
 //# sourceMappingURL=form.js.map

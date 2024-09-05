@@ -7,3 +7,4 @@ export declare const isEmpty: (val: unknown) => boolean;
 export declare const isElement: (e: unknown) => e is Element;
 export declare const isPropAbsent: (prop: unknown) => prop is null | undefined;
 export declare const isStringNumber: (val: string) => boolean;
+export declare const isWindow: (val: unknown) => val is Window;

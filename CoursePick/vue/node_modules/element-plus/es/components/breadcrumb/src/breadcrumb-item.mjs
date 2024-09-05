@@ -6,10 +6,7 @@ const breadcrumbItemProps = buildProps({
     type: definePropType([String, Object]),
     default: ""
   },
-  replace: {
-    type: Boolean,
-    default: false
-  }
+  replace: Boolean
 });
 
 export { breadcrumbItemProps };

@@ -7,6 +7,7 @@ export declare const useFormItem: () => {
 export declare type IUseFormItemInputCommonProps = {
     id?: string;
     label?: string | number | boolean | Record<string, any>;
+    ariaLabel?: string | number | boolean | Record<string, any>;
 };
 export declare const useFormItemInputId: (props: Partial<IUseFormItemInputCommonProps>, { formItemContext, disableIdGeneration, disableIdManagement, }: {
     formItemContext?: FormItemContext | undefined;

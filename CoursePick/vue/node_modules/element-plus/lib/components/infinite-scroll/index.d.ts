@@ -1,7 +1,7 @@
 import type { SFCWithInstall } from 'element-plus/es/utils';
 declare const _InfiniteScroll: SFCWithInstall<import("vue").ObjectDirective<HTMLElement & {
     ElInfiniteScroll: {
-        container: Window | HTMLElement;
+        container: HTMLElement | Window;
         containerEl: HTMLElement;
         instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>;
         delay: number;
@@ -14,7 +14,7 @@ declare const _InfiniteScroll: SFCWithInstall<import("vue").ObjectDirective<HTML
 export default _InfiniteScroll;
 export declare const ElInfiniteScroll: SFCWithInstall<import("vue").ObjectDirective<HTMLElement & {
     ElInfiniteScroll: {
-        container: Window | HTMLElement;
+        container: HTMLElement | Window;
         containerEl: HTMLElement;
         instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}>>;
         delay: number;

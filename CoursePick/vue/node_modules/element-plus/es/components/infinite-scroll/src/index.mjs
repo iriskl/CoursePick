@@ -109,6 +109,8 @@ const InfiniteScroll = {
     container.addEventListener("scroll", onScroll);
   },
   unmounted(el) {
+    if (!el[SCOPE])
+      return;
     const { container, onScroll } = el[SCOPE];
     container == null ? void 0 : container.removeEventListener("scroll", onScroll);
     destroyObserver(el);

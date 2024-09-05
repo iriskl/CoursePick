@@ -19,6 +19,11 @@ const formItemProps = runtime.buildProps({
     type: [String, Number],
     default: ""
   },
+  labelPosition: {
+    type: String,
+    values: ["left", "right", "top", ""],
+    default: ""
+  },
   prop: {
     type: runtime.definePropType([String, Array])
   },

@@ -24,4 +24,5 @@ const SpaceItem = vue.defineComponent({
 });
 
 exports["default"] = SpaceItem;
+exports.spaceItemProps = spaceItemProps;
 //# sourceMappingURL=item.js.map

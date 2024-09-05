@@ -15,6 +15,11 @@ const formItemProps = buildProps({
     type: [String, Number],
     default: ""
   },
+  labelPosition: {
+    type: String,
+    values: ["left", "right", "top", ""],
+    default: ""
+  },
   prop: {
     type: definePropType([String, Array])
   },

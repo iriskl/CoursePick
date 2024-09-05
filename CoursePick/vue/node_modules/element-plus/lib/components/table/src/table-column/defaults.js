@@ -50,6 +50,7 @@ var defaultProps = {
     type: Boolean,
     default: true
   },
+  filterClassName: String,
   index: [Number, Function],
   sortOrders: {
     type: Array,

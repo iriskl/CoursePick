@@ -127,7 +127,12 @@ var TableHeader = vue.defineComponent({
         key: `${column.id}-thead`,
         rowspan: column.rowSpan,
         style: getHeaderCellStyle(rowIndex, cellIndex, subColumns, column),
-        onClick: ($event) => handleHeaderClick($event, column),
+        onClick: ($event) => {
+          if ($event.currentTarget.classList.contains("noclick")) {
+            return;
+          }
+          handleHeaderClick($event, column);
+        },
         onContextmenu: ($event) => handleHeaderContextMenu($event, column),
         onMousedown: ($event) => handleMouseDown($event, column),
         onMousemove: ($event) => handleMouseMove($event, column),
@@ -165,6 +170,10 @@ var TableHeader = vue.defineComponent({
             upDataColumn: (key, value) => {
               column[key] = value;
             }
+          }, {
+            "filter-icon": () => column.renderFilterIcon ? column.renderFilterIcon({
+              filterOpened: column.filterOpened
+            }) : null
           })
         ])
       ]);

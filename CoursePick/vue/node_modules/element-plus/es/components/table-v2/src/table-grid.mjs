@@ -68,14 +68,12 @@ const useTableGrid = (props) => {
   function scrollTo(leftOrOptions, top) {
     const header$ = unref(headerRef);
     const body$ = unref(bodyRef);
-    if (!header$ || !body$)
-      return;
     if (isObject(leftOrOptions)) {
-      header$.scrollToLeft(leftOrOptions.scrollLeft);
-      body$.scrollTo(leftOrOptions);
+      header$ == null ? void 0 : header$.scrollToLeft(leftOrOptions.scrollLeft);
+      body$ == null ? void 0 : body$.scrollTo(leftOrOptions);
     } else {
-      header$.scrollToLeft(leftOrOptions);
-      body$.scrollTo({
+      header$ == null ? void 0 : header$.scrollToLeft(leftOrOptions);
+      body$ == null ? void 0 : body$.scrollTo({
         scrollLeft: leftOrOptions,
         scrollTop: top
       });

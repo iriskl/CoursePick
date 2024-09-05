@@ -57,6 +57,9 @@ const imageProps = runtime.buildProps({
   maxScale: {
     type: Number,
     default: 7
+  },
+  crossorigin: {
+    type: runtime.definePropType(String)
   }
 });
 const imageEmits = {

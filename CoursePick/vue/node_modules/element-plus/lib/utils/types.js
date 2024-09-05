@@ -24,6 +24,9 @@ const isStringNumber = (val) => {
   }
   return !Number.isNaN(Number(val));
 };
+const isWindow = (val) => {
+  return val === window;
+};
 
 Object.defineProperty(exports, 'isArray', {
   enumerable: true,
@@ -64,4 +67,5 @@ exports.isNumber = isNumber;
 exports.isPropAbsent = isPropAbsent;
 exports.isStringNumber = isStringNumber;
 exports.isUndefined = isUndefined;
+exports.isWindow = isWindow;
 //# sourceMappingURL=types.js.map

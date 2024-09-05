@@ -27,13 +27,11 @@
           </el-menu-item>
           <el-sub-menu index="2">
             <template #title>
-              <el-icon><Memo /></el-icon>
+              <el-icon><Avatar /></el-icon>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="/admin">
-              <el-icon><User /></el-icon>
-              <span>管理员信息</span>
-            </el-menu-item>
+            <el-menu-item index="/admin"><el-icon><User /></el-icon><span>管理员信息</span></el-menu-item>
+            <el-menu-item index="/teacher"><el-icon><User /></el-icon><span>教师信息</span></el-menu-item>
           </el-sub-menu>
           <el-menu-item index="/person">
             <el-icon><User /></el-icon>

@@ -53,7 +53,7 @@ declare const _default: import("vue").DefineComponent<{
     onCurrentTabIdChange?: ((...args: any[]) => any) | undefined;
     onEntryFocus?: ((...args: any[]) => any) | undefined;
 }, {
-    loop: boolean;
     dir: string;
+    loop: boolean;
 }>;
 export default _default;

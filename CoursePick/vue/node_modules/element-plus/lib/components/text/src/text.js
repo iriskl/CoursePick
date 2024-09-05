@@ -18,9 +18,7 @@ const textProps = runtime.buildProps({
     values: size.componentSizes,
     default: ""
   },
-  truncated: {
-    type: Boolean
-  },
+  truncated: Boolean,
   lineClamp: {
     type: [String, Number]
   },

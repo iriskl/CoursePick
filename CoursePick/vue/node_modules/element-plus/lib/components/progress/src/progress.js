@@ -21,10 +21,7 @@ const progressProps = runtime.buildProps({
     default: "",
     values: ["", "success", "exception", "warning"]
   },
-  indeterminate: {
-    type: Boolean,
-    default: false
-  },
+  indeterminate: Boolean,
   duration: {
     type: Number,
     default: 3
@@ -37,10 +34,7 @@ const progressProps = runtime.buildProps({
     type: runtime.definePropType(String),
     default: "round"
   },
-  textInside: {
-    type: Boolean,
-    default: false
-  },
+  textInside: Boolean,
   width: {
     type: Number,
     default: 126

@@ -12,11 +12,8 @@ const dialogContentProps = runtime.buildProps({
   closeIcon: {
     type: icon.iconPropType
   },
-  customClass: {
-    type: String,
-    default: ""
-  },
   draggable: Boolean,
+  overflow: Boolean,
   fullscreen: Boolean,
   showClose: {
     type: Boolean,

@@ -9,6 +9,10 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<Color>;
         required: true;
     };
+    enableAlpha: {
+        type: BooleanConstructor;
+        required: true;
+    };
 }, {
     rgbaColors: Ref<Color[]>;
     handleSelect: (index: number) => void;
@@ -37,6 +41,10 @@ declare const _default: import("vue").DefineComponent<{
     };
     color: {
         type: PropType<Color>;
+        required: true;
+    };
+    enableAlpha: {
+        type: BooleanConstructor;
         required: true;
     };
 }>>, {}>;

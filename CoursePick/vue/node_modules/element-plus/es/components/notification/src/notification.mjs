@@ -13,10 +13,7 @@ const notificationProps = buildProps({
     type: String,
     default: ""
   },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false
-  },
+  dangerouslyUseHTMLString: Boolean,
   duration: {
     type: Number,
     default: 4500

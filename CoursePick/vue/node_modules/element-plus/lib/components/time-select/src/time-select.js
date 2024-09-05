@@ -7,6 +7,7 @@ var iconsVue = require('@element-plus/icons-vue');
 require('../../../hooks/index.js');
 var runtime = require('../../../utils/vue/props/runtime.js');
 var index = require('../../../hooks/use-size/index.js');
+var index$1 = require('../../../hooks/use-empty-values/index.js');
 
 const timeSelectProps = runtime.buildProps({
   format: {
@@ -20,7 +21,7 @@ const timeSelectProps = runtime.buildProps({
     default: true
   },
   effect: {
-    type: String,
+    type: runtime.definePropType(String),
     default: "light"
   },
   clearable: {
@@ -51,7 +52,8 @@ const timeSelectProps = runtime.buildProps({
   clearIcon: {
     type: runtime.definePropType([String, Object]),
     default: () => iconsVue.CircleClose
-  }
+  },
+  ...index$1.useEmptyValuesProps
 });
 
 exports.timeSelectProps = timeSelectProps;

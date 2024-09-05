@@ -10,6 +10,10 @@ const cardProps = runtime.buildProps({
     type: String,
     default: ""
   },
+  footer: {
+    type: String,
+    default: ""
+  },
   bodyStyle: {
     type: runtime.definePropType([String, Object, Array]),
     default: ""

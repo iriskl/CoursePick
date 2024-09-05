@@ -6,20 +6,16 @@ import { componentSizes } from '../../../constants/size.mjs';
 const tagProps = buildProps({
   type: {
     type: String,
-    values: ["success", "info", "warning", "danger", ""],
-    default: ""
+    values: ["primary", "success", "info", "warning", "danger"],
+    default: "primary"
   },
   closable: Boolean,
   disableTransitions: Boolean,
   hit: Boolean,
-  color: {
-    type: String,
-    default: ""
-  },
+  color: String,
   size: {
     type: String,
-    values: componentSizes,
-    default: ""
+    values: componentSizes
   },
   effect: {
     type: String,

@@ -8,11 +8,8 @@ const dialogContentProps = buildProps({
   closeIcon: {
     type: iconPropType
   },
-  customClass: {
-    type: String,
-    default: ""
-  },
   draggable: Boolean,
+  overflow: Boolean,
   fullscreen: Boolean,
   showClose: {
     type: Boolean,
