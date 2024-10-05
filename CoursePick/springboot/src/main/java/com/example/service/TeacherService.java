@@ -43,4 +43,8 @@ public class TeacherService {
         }
         return PageInfo.of(list);
     }
+
+    public void updateById(Teacher teacher) {
+        teacherMapper.updateById(teacher);
+    }
 }

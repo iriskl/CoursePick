@@ -18,4 +18,6 @@ public interface TeacherMapper {
 
     @Select("select * from teacher where name like concat('%', #{name}, '%')")
     List<Teacher> selectByName(String name);
+
+    void updateById(Teacher teacher);
 }

@@ -9,4 +9,10 @@
         values (#{username}, #{password}, #{name}, #{avatar}, #{role}, #{sex}, #{title}, #{specialityId})
     </insert>
 
+    <update id="updateById" parameterType="com.example.entity.Teacher">
+        update teacher
+        set username = #{username}, password = #{password}, name = #{name}, avatar = #{avatar}, role = #{role}, sex = #{sex}, title = #{title}, speciality_id = #{specialityId}
+        where id = #{id}
+    </update>
+
 </mapper>

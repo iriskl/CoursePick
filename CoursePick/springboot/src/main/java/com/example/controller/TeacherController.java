@@ -27,6 +27,15 @@ public class TeacherController {
     }
 
     /**
+     * 编辑（更新）
+     */
+    @PutMapping("/update")
+    public Result update(@RequestBody Teacher teacher) {
+        teacherService.updateById(teacher);
+        return Result.success();
+    }
+
+    /**
      * 分页查询
      */
     @GetMapping("/selectPage")

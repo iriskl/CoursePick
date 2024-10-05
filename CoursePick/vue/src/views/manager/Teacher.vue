@@ -108,7 +108,7 @@ const handleAdd = () => {
   data.formVisible = true
 }
 
-const save = () => {
+const add = () => {
   request.post('/teacher/add', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('操作成功')
@@ -120,9 +120,30 @@ const save = () => {
   })
 }
 
+const update = () => {
+  request.put('/teacher/update', data.form).then(res => {
+    if (res.code === '200') {
+      ElMessage.success('操作成功')
+      load()
+      data.formVisible = false
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
+const save = () => {
+  data.form.id ? update() : add()
+}
+
 const reset = () => {
   data.name = null
   load()
+}
+
+const handleEdit = (row) => {
+  data.form = JSON.parse(JSON.stringify(row))
+  data.formVisible = true
 }
 
 load()
