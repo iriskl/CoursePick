@@ -47,4 +47,8 @@ public class TeacherService {
     public void updateById(Teacher teacher) {
         teacherMapper.updateById(teacher);
     }
+
+    public void deleteById(Integer id) {
+        teacherMapper.deleteById(id);
+    }
 }

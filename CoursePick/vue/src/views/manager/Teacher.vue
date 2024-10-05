@@ -146,5 +146,18 @@ const handleEdit = (row) => {
   data.formVisible = true
 }
 
+const handleDelete = (id) => {
+  ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗?', '删除确认', { type: 'warning' }).then(res => {
+    request.delete('/teacher/deleteById/' + id).then(res => {
+      if (res.code === '200') {
+        ElMessage.success('操作成功')
+        load()
+      } else {
+        ElMessage.error(res.msg)
+      }
+    })
+  }).catch(err => {})
+}
+
 load()
 </script>

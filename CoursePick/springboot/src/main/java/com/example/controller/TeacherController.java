@@ -36,6 +36,15 @@ public class TeacherController {
     }
 
     /**
+     * 删除
+     */
+    @DeleteMapping("/deleteById/{id}")
+    public Result deleteById(@PathVariable Integer id) {
+        teacherService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
      * 分页查询
      */
     @GetMapping("/selectPage")
