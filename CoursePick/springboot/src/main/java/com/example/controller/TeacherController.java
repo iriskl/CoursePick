@@ -3,11 +3,9 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Teacher;
 import com.example.service.TeacherService;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 教师模块前端请求接口的入口
@@ -24,8 +22,18 @@ public class TeacherController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Teacher teacher) {
-
         teacherService.add(teacher);
         return Result.success();
+    }
+
+    /**
+     * 分页查询
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(Teacher teacher,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "5") Integer pageSize) {
+        PageInfo<Teacher> pageInfo = teacherService.selectPage(teacher, pageNum, pageSize);
+        return Result.success(pageInfo);
     }
 }

@@ -4,8 +4,12 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.entity.Teacher;
 import com.example.exception.CustomException;
 import com.example.mapper.TeacherMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 教师信息业务层处理
@@ -27,5 +31,16 @@ public class TeacherService {
         }
         teacher.setRole("TEACHER");
         teacherMapper.insert(teacher);
+    }
+
+    public PageInfo<Teacher> selectPage(Teacher teacher, Integer pageNum, Integer pageSize) {
+        List<Teacher> list;
+        PageHelper.startPage(pageNum, pageSize);
+        if (ObjectUtil.isNotEmpty(teacher.getName())) {
+            list = teacherMapper.selectByName(teacher.getName());
+        } else {
+            list = teacherMapper.selectAll();
+        }
+        return PageInfo.of(list);
     }
 }
