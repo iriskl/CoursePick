@@ -54,3 +54,9 @@
 
 - 原因：忘记在Teacher.vue最后加上load()，load函数是加载教师信息到表单的函数，加上这一行才能使教师信息页面默认加载教师信息
 - 解决方法：加上load()
+
+## 10.在写教师信息更新时遇到405错误码
+
+- 原因是前端一开始写的是`Post`请求，后端接口是`Put`请求，请求方式不一致导致405报错
+
+![image.png](https://cdn.nlark.com/yuque/0/2024/png/38425080/1722245687591-0987001f-6183-40fe-b7da-8d43f7463e37.png#averageHue=%23f5f4f4&clientId=u0da10289-cd52-4&from=paste&height=136&id=u5ff8cea8&originHeight=170&originWidth=685&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=12222&status=done&style=none&taskId=u6bb27e23-c0d8-4033-8fe5-988a1cebbac&title=&width=548)
