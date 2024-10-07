@@ -78,3 +78,13 @@
   ```
 
   与`.env.development`的路径名一致
+
+## 12.在写学生信息（复制粘贴）时出现问题
+
+原因是我的`StudentMapper.xml`中一些字段写错了，比如`collegeId`写成了`college_id`
+
+```sql
+values (#{username}, #{password}, #{name}, #{role}, #{sex}, #{code}, #{collegeId}, #{score}, #{avatar})
+```
+
+这里是values所以要写实体类Student中的字段，而不是`#{college_id}`
