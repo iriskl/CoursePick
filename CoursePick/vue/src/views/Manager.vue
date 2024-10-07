@@ -32,6 +32,7 @@
             </template>
             <el-menu-item index="/admin"><el-icon><User /></el-icon><span>管理员信息</span></el-menu-item>
             <el-menu-item index="/teacher"><el-icon><User /></el-icon><span>教师信息</span></el-menu-item>
+            <el-menu-item index="/student"><el-icon><User /></el-icon><span>学生信息</span></el-menu-item>
           </el-sub-menu>
           <el-menu-item index="/person">
             <el-icon><User /></el-icon>

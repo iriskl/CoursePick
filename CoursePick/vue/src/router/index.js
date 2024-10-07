@@ -13,6 +13,7 @@ const router = createRouter({
         { path: 'home', component: () => import('@/views/manager/Home.vue')},
         { path: 'admin', component: () => import('@/views/manager/Admin.vue')},
         { path: 'teacher', component: () => import('@/views/manager/Teacher.vue')},
+        { path: 'student', component: () => import('@/views/manager/Student.vue')},
       ]
     },
     { path: '/login', component: () => import('@/views/Login.vue')},
