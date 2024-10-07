@@ -13,7 +13,11 @@
       </div>
       <el-table :data="data.tableData" stripe>
         <el-table-column label="用户名" prop="username"></el-table-column>
-        <el-table-column label="头像" prop="avatar"></el-table-column>
+        <el-table-column label="头像" prop="avatar">
+          <template #default="scope">
+            <el-image :src="scope.row.avatar" style="width: 40px; height: 40px; border-radius: 50%"></el-image>
+          </template>
+        </el-table-column>
         <el-table-column label="名称" prop="name"></el-table-column>
         <el-table-column label="性别" prop="sex"></el-table-column>
         <el-table-column label="职称" prop="title"></el-table-column>
@@ -34,6 +38,11 @@
     <div>
       <el-dialog title="教师信息" width="40%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
         <el-form :model="data.form" label-width="100px" style="padding-right: 50px">
+          <el-form-item label="头像" prop="avatar">
+            <el-upload :action="uploadUrl" list-type="picture" :on-success="handleImgSuccess">
+              <el-button type="primary">上传图片</el-button>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="账号" prop="username">
             <el-input v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
           </el-form-item>
@@ -70,6 +79,9 @@
 import {reactive} from "vue";
 import request from "@/utils/request";
 import {ElMessageBox, ElMessage} from "element-plus";
+
+//文件上传接口
+const uploadUrl = import.meta.env.VITE_BASE_URL + '/files/upload'
 
 const data = reactive({
   formVisible: false,
@@ -157,6 +169,10 @@ const handleDelete = (id) => {
       }
     })
   }).catch(err => {})
+}
+
+const handleImgSuccess = (res) => {
+  data.form.avatar = res.data
 }
 
 load()
