@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #1450aa">欢 迎 登 录</div>
+      <div style="font-weight: bold; font-size: 34px; text-align: center; margin-bottom: 30px; color: #1450aa">学生选课系统</div>
       <el-form :model="data.form"  ref="formRef" :rules="data.rules">
         <el-form-item prop="username">
           <el-input :prefix-icon="User" size="large" v-model="data.form.username" placeholder="请输入账号" />
@@ -12,6 +12,8 @@
         <el-form-item prop="role">
           <el-select size="large" style="width: 100%" v-model="data.form.role">
             <el-option value="ADMIN" label="管理员"></el-option>
+            <el-option value="TEACHER" label="教师"></el-option>
+            <el-option value="STUDENT" label="学生"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -34,7 +36,7 @@
   import router from "@/router";
 
   const data = reactive({
-    form: { role: 'ADMIN' },
+    form: {},
     rules: {
       username: [
         { required: true, message: '请输入账号', trigger: 'blur' },
@@ -76,11 +78,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
+  //background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
+  background-image: url("@/assets/imgs/bg.png");
   background-size: cover;
 }
 .login-box {
-  width: 350px;
+  width: 400px;
   padding: 50px 30px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0,.1);

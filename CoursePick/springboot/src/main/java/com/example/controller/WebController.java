@@ -3,6 +3,8 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.StudentService;
+import com.example.service.TeacherService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,11 @@ public class WebController {
     @Resource
     private AdminService adminService;
 
+    @Resource
+    private TeacherService teacherService;
+
+    @Resource
+    private StudentService studentService;
 
     /**
      * 默认请求接口
@@ -27,11 +34,16 @@ public class WebController {
      */
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
-        Account ac = null;
         if ("ADMIN".equals(account.getRole())) {
-            ac = adminService.login(account);
+            return Result.success(adminService.login(account));
         }
-        return Result.success(ac);
+        if ("TEACHER".equals(account.getRole())) {
+            return Result.success(teacherService.login(account));
+        }
+        if ("STUDENT".equals(account.getRole())) {
+            return Result.success(studentService.login(account));
+        }
+        return Result.success();
     }
 
     /**
@@ -52,5 +64,4 @@ public class WebController {
         }
         return Result.success();
     }
-
 }

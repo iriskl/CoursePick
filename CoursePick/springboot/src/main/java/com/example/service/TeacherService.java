@@ -1,6 +1,7 @@
 package com.example.service;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.example.entity.Account;
 import com.example.entity.Teacher;
 import com.example.exception.CustomException;
 import com.example.mapper.TeacherMapper;
@@ -50,5 +51,19 @@ public class TeacherService {
 
     public void deleteById(Integer id) {
         teacherMapper.deleteById(id);
+    }
+
+    /**
+     * 登录
+     */
+    public Account login(Account account) {
+        Account dbTeacher = teacherMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbTeacher)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbTeacher.getPassword())) {
+            throw new CustomException("账号或密码错误");
+        }
+        return dbTeacher;
     }
 }
