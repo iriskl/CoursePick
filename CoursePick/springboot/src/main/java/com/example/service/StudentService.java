@@ -30,6 +30,9 @@ public class StudentService {
         if (ObjectUtil.isEmpty(student.getPassword())) {
             student.setPassword("123456");
         }
+        if (ObjectUtil.isEmpty(student.getName())) {
+            student.setName(student.getUsername());
+        }
         student.setRole("STUDENT");
         student.setScore(0);
         studentMapper.insert(student);
