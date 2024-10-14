@@ -88,3 +88,12 @@ values (#{username}, #{password}, #{name}, #{role}, #{sex}, #{code}, #{collegeId
 ```
 
 这里是values所以要写实体类Student中的字段，而不是`#{college_id}`
+
+## 13.Cannot read properties of undefined (reading 'sex')
+
+![image-20241014222423048](C:\Users\Iris\AppData\Roaming\Typora\typora-user-images\image-20241014222423048.png)
+
+原因如图，读取了未定义的`sex`属性，因为`TPerson.vue`的`data`没有定义`form`，只有`user`
+
+解决办法：将`data.form`改为`data.user`
+
