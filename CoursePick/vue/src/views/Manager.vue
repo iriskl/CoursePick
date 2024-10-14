@@ -34,10 +34,9 @@
             <el-menu-item index="/teacher"><el-icon><User /></el-icon><span>教师信息</span></el-menu-item>
             <el-menu-item index="/student"><el-icon><User /></el-icon><span>学生信息</span></el-menu-item>
           </el-sub-menu>
-          <el-menu-item index="/person">
-            <el-icon><User /></el-icon>
-            <span>个人资料</span>
-          </el-menu-item>
+          <el-menu-item v-if="data.user.role === 'ADMIN'" index="/person"><el-icon><User /></el-icon><span>个人资料</span></el-menu-item>
+          <el-menu-item v-if="data.user.role === 'TEACHER'" index="/tPerson"><el-icon><User /></el-icon><span>个人资料</span></el-menu-item>
+          <el-menu-item v-if="data.user.role === 'STUDENT'" index="/sPerson"><el-icon><User /></el-icon><span>个人资料</span></el-menu-item>
           <el-menu-item index="/password">
             <el-icon><Lock /></el-icon>
             <span>修改密码</span>

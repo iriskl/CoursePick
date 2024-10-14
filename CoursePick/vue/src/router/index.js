@@ -9,6 +9,8 @@ const router = createRouter({
       redirect: '/home',
       children: [
         { path: 'person', component: () => import('@/views/manager/Person.vue')},
+        { path: 'tPerson', component: () => import('@/views/manager/TPerson.vue')},
+        { path: 'sPerson', component: () => import('@/views/manager/SPerson.vue')},
         { path: 'password', component: () => import('@/views/manager/Password.vue')},
         { path: 'home', component: () => import('@/views/manager/Home.vue')},
         { path: 'admin', component: () => import('@/views/manager/Admin.vue')},
