@@ -79,7 +79,7 @@
   justify-content: center;
   align-items: center;
   //background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
-  background-image: url("@/assets/imgs/bg.png");
+  background-image: url("@/assets/imgs/login-background.png");
   background-size: cover;
 }
 .login-box {

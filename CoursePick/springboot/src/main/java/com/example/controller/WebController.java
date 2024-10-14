@@ -50,7 +50,8 @@ public class WebController {
      * 注册
      */
     @PostMapping("/register")
-    public Result register() {
+    public Result register(@RequestBody Account account) {
+        studentService.register(account);
         return Result.success();
     }
 

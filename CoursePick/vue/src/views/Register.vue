@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #1450aa">欢 迎 注 册</div>
+      <div style="font-weight: bold; font-size: 34px; text-align: center; margin-bottom: 30px; color: #1450aa">欢 迎 注 册</div>
       <el-form :model="data.form"  ref="formRef" :rules="data.rules">
         <el-form-item prop="username">
           <el-input :prefix-icon="User" size="large" v-model="data.form.username" placeholder="请输入账号" />
@@ -17,7 +17,7 @@
         </el-form-item>
       </el-form>
       <div style="text-align: right;">
-        还没有账号？请 <a href="/login">登录</a>
+        已成功注册账号？请 <a href="/login">登录</a>
       </div>
     </div>
 
@@ -87,11 +87,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #a8c0ff, #3f2b96);
+  //background: linear-gradient(to bottom, #a8c0ff, #3f2b96);
+  background-image: url("@/assets/imgs/register-background.png");
   background-size: cover;
 }
 .login-box {
-  width: 350px;
+  width: 400px;
   padding: 50px 30px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0,.1);

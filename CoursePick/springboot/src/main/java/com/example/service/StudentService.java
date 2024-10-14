@@ -67,4 +67,14 @@ public class StudentService {
         }
         return dbStudent;
     }
+
+    /**
+     * 注册
+     */
+    public void register(Account account) {
+        Student student = new Student();
+        student.setUsername(account.getUsername());
+        student.setPassword(account.getPassword());
+        add(student);
+    }
 }
