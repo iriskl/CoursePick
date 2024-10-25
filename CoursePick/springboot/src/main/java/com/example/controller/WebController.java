@@ -63,6 +63,29 @@ public class WebController {
         if ("ADMIN".equals(account.getRole())) {
             adminService.updatePassword(account);
         }
+        if ("TEACHER".equals(account.getRole())) {
+            teacherService.updatePassword(account);
+        }
+        if ("STUDENT".equals(account.getRole())) {
+            studentService.updatePassword(account);
+        }
+        return Result.success();
+    }
+
+    /**
+     * 验证密码
+     */
+    @PostMapping("/verifyPassword")
+    public Result verifyPassword(@RequestBody Account account) {
+        if ("ADMIN".equals(account.getRole())) {
+            adminService.verifyPassword(account);
+        }
+        if ("TEACHER".equals(account.getRole())) {
+            teacherService.verifyPassword(account);
+        }
+        if ("STUDENT".equals(account.getRole())) {
+            studentService.verifyPassword(account);
+        }
         return Result.success();
     }
 }

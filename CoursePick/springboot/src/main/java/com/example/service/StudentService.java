@@ -80,4 +80,32 @@ public class StudentService {
         student.setPassword(account.getPassword());
         add(student);
     }
+
+    /**
+     * 修改密码
+     */
+    public void updatePassword(Account account) {
+        Student dbStudent = studentMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbStudent)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbStudent.getPassword())) {
+            throw new CustomException("原密码错误");
+        }
+        dbStudent.setPassword(account.getNewPassword());
+        studentMapper.updateById(dbStudent);
+    }
+
+    /**
+     * 验证密码
+     */
+    public void verifyPassword(Account account) {
+        Student dbStudent = studentMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbStudent)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbStudent.getPassword())) {
+            throw new CustomException("密码错误");
+        }
+    }
 }

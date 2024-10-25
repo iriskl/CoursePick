@@ -105,4 +105,16 @@ public class AdminService {
         adminMapper.updateById(dbAdmin);
     }
 
+    /**
+     * 验证密码
+     */
+    public void verifyPassword(Account account) {
+        Admin dbAdmin = adminMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbAdmin)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbAdmin.getPassword())) {
+            throw new CustomException("密码错误");
+        }
+    }
 }

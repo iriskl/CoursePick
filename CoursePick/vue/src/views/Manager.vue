@@ -19,13 +19,20 @@
             router
             style="border: none"
             :default-active="router.currentRoute.value.path"
-            :default-openeds="['/home', '2']"
+            :default-openeds="['/home']"
         >
           <el-menu-item index="/home">
             <el-icon><HomeFilled /></el-icon>
             <span>系统首页</span>
           </el-menu-item>
           <el-sub-menu index="2">
+            <template #title>
+              <el-icon><Promotion /></el-icon>
+              <span>信息管理</span>
+            </template>
+            <el-menu-item index="/notice" v-if="data.user.role === 'ADMIN'"><el-icon><Bell /></el-icon><span>公告信息</span></el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="3" v-if="data.user.role === 'ADMIN'">
             <template #title>
               <el-icon><Avatar /></el-icon>
               <span>用户管理</span>

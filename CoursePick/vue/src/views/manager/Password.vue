@@ -9,7 +9,7 @@
           <el-input v-model="data.user.newPassword" show-password />
         </el-form-item>
         <el-form-item label="确认新密码">
-          <el-input v-model="data.user.confirmPasword" show-password />
+          <el-input v-model="data.user.confirmPassword" show-password />
         </el-form-item>
         <div style="text-align: center">
           <el-button type="primary" @click="save">保存</el-button>
@@ -26,23 +26,36 @@ import {ElMessage} from "element-plus";
 import router from "@/router";
 
 const data = reactive({
-  user: JSON.parse(localStorage.getItem('system-user') || '{}'),
+  user: {
+    ...JSON.parse(localStorage.getItem('system-user') || '{}'),
+    password: '', // 初始化原密码为空
+    newPassword: '',
+    confirmPassword: ''
+  }
 })
 
 // 把当前修改的用户信息存储到后台数据库
 const save = () => {
-  if (data.user.newPassword !== data.user.confirmPasword) {
-    ElMessage.error('确认新密码错误')
+  if (data.user.newPassword !== data.user.confirmPassword) {
+    ElMessage.error('两次密码输入不一致')
     return
   }
-  request.put('/updatePassword', data.user).then(res => {
+  // 验证原密码
+  request.post('/verifyPassword', data.user).then(res => {
     if (res.code === '200') {
-      ElMessage.success('修改密码成功')
-      // 清空缓存
-      localStorage.removeItem('system-user')
-      router.push('/login')
+      // 原密码验证成功，继续修改密码
+      request.put('/updatePassword', data.user).then(res => {
+        if (res.code === '200') {
+          ElMessage.success('修改密码成功')
+          // 清空缓存
+          localStorage.removeItem('system-user')
+          router.push('/login')
+        } else {
+          ElMessage.error(res.msg)
+        }
+      })
     } else {
-      ElMessage.error(res.msg)
+      ElMessage.error('原密码错误')
     }
   })
 }

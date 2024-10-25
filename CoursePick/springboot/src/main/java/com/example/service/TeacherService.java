@@ -66,4 +66,32 @@ public class TeacherService {
         }
         return dbTeacher;
     }
+
+    /**
+     * 修改密码
+     */
+    public void updatePassword(Account account) {
+        Teacher dbTeacher = teacherMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbTeacher)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbTeacher.getPassword())) {
+            throw new CustomException("原密码错误");
+        }
+        dbTeacher.setPassword(account.getNewPassword());
+        teacherMapper.updateById(dbTeacher);
+    }
+
+    /**
+     * 验证密码
+     */
+    public void verifyPassword(Account account) {
+        Teacher dbTeacher = teacherMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbTeacher)) {
+            throw new CustomException("用户不存在");
+        }
+        if (!account.getPassword().equals(dbTeacher.getPassword())) {
+            throw new CustomException("密码错误");
+        }
+    }
 }
