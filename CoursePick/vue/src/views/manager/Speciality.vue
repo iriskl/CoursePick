@@ -2,7 +2,7 @@
   <div>
 
     <div class="card" style="margin-bottom: 5px;">
-      <el-input v-model="data.title" style="width: 300px; margin-right: 10px" placeholder="请输入标题查询"></el-input>
+      <el-input v-model="data.name" style="width: 300px; margin-right: 10px" placeholder="请输入专业名称查询"></el-input>
       <el-button type="primary" @click="load">查询</el-button>
       <el-button type="info" style="margin: 0 10px" @click="reset">重置</el-button>
     </div>
@@ -11,10 +11,9 @@
       <div style="margin-bottom: 10px">
         <el-button type="primary" @click="handleAdd">新增</el-button>
       </div>
-      <el-table :data="[...data.tableData].reverse()" stripe>
-        <el-table-column label="公告标题" prop="title"></el-table-column>
-        <el-table-column label="公告内容" prop="content"></el-table-column>
-        <el-table-column label="发布时间" prop="time"></el-table-column>
+      <el-table :data="data.tableData" stripe>
+        <el-table-column label="专业名称" prop="name"></el-table-column>
+        <el-table-column label="所属学院" prop="collegeName"></el-table-column>
         <el-table-column label="操作" align="center" width="160">
           <template #default="scope">
             <el-button type="primary" @click="handleEdit(scope.row)">编辑</el-button>
@@ -28,13 +27,19 @@
       <el-pagination background layout="prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
     </div>
 
-    <el-dialog title="公告信息" width="40%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="专业信息" width="40%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="data.form" label-width="100px" style="padding-right: 50px">
-        <el-form-item label="公告标题" prop="title">
-          <el-input v-model="data.form.title" autocomplete="off" />
+        <el-form-item label="专业名称" prop="name">
+          <el-input v-model="data.form.name" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="公告内容" prop="content">
-          <el-input type="textarea" :rows="4" v-model="data.form.content" autocomplete="off" />
+        <el-form-item label="所属学院" prop="college">
+          <el-select v-model="data.form.collegeId" placeholder="请选择所属学院">
+            <el-option
+                v-for="item in data.collegeData"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"/>
+          </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -60,16 +65,17 @@ const data = reactive({
   formVisible: false,
   form: {},
   tableData: [],
-  title: null
+  name: null,
+  collegeData: []
 })
 
 // 分页查询
 const load = () => {
-  request.get('/notice/selectPage', {
+  request.get('/speciality/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
-      title: data.title
+      name: data.name
     }
   }).then(res => {
     data.tableData = res.data?.list
@@ -91,7 +97,7 @@ const handleEdit = (row) => {
 
 // 新增保存
 const add = () => {
-  request.post('/notice/add', data.form).then(res => {
+  request.post('/speciality/add', data.form).then(res => {
     if (res.code === '200') {
       load()
       ElMessage.success('操作成功')
@@ -104,7 +110,7 @@ const add = () => {
 
 // 编辑保存
 const update = () => {
-  request.put('/notice/update', data.form).then(res => {
+  request.put('/speciality/update', data.form).then(res => {
     if (res.code === '200') {
       load()
       ElMessage.success('操作成功')
@@ -124,7 +130,7 @@ const save = () => {
 // 删除
 const handleDelete = (id) => {
   ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗?', '删除确认', { type: 'warning' }).then(res => {
-    request.delete('/notice/deleteById/' + id).then(res => {
+    request.delete('/speciality/deleteById/' + id).then(res => {
       if (res.code === '200') {
         load()
         ElMessage.success('操作成功')
@@ -137,9 +143,21 @@ const handleDelete = (id) => {
 
 // 重置
 const reset = () => {
-  data.title = null
+  data.name = null
   load()
 }
 
+// 查询学院
+const loadCollege = () => {
+  request.get('/college/selectAll').then(res => {
+    if (res.code === '200') {
+      data.collegeData = res.data
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
 load()
+loadCollege()
 </script>
