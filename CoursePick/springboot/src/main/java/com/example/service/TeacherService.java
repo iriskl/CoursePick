@@ -94,4 +94,11 @@ public class TeacherService {
             throw new CustomException("密码错误");
         }
     }
+
+    /**
+     * 查询所有
+     */
+    public List<Teacher> selectAll() {
+        return teacherMapper.selectAll();
+    }
 }

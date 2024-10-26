@@ -1,28 +1,30 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.Teacher;
-import com.example.service.TeacherService;
+import com.example.entity.Course;
+import com.example.service.CourseService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
- * 教师模块前端请求接口的入口
+ * 课程信息模块前端请求接口的入口
  */
 @RestController
-@RequestMapping("/teacher")
-public class TeacherController {
+@RequestMapping("/course")
+public class CourseController {
 
     @Resource
-    private TeacherService teacherService;
+    private CourseService courseService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Teacher teacher) {
-        teacherService.add(teacher);
+    public Result add(@RequestBody Course course) {
+        courseService.add(course);
         return Result.success();
     }
 
@@ -30,8 +32,8 @@ public class TeacherController {
      * 编辑（更新）
      */
     @PutMapping("/update")
-    public Result update(@RequestBody Teacher teacher) {
-        teacherService.updateById(teacher);
+    public Result update(@RequestBody Course course) {
+        courseService.updateById(course);
         return Result.success();
     }
 
@@ -40,7 +42,7 @@ public class TeacherController {
      */
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        teacherService.deleteById(id);
+        courseService.deleteById(id);
         return Result.success();
     }
 
@@ -48,10 +50,10 @@ public class TeacherController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(Teacher teacher,
+    public Result selectPage(Course course,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "5") Integer pageSize) {
-        PageInfo<Teacher> pageInfo = teacherService.selectPage(teacher, pageNum, pageSize);
+        PageInfo<Course> pageInfo = courseService.selectPage(course, pageNum, pageSize);
         return Result.success(pageInfo);
     }
 
@@ -60,6 +62,7 @@ public class TeacherController {
      */
     @GetMapping("/selectAll")
     public Result selectAll() {
-        return Result.success(teacherService.selectAll());
+        List<Course> list = courseService.selectAll();
+        return Result.success(list);
     }
 }
