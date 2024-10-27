@@ -26,11 +26,21 @@ public class CourseService {
     public PageInfo<Course> selectPage(Course course, Integer pageNum, Integer pageSize) {
         List<Course> list;
         PageHelper.startPage(pageNum, pageSize);
-        if (ObjectUtil.isNotEmpty(course.getName())) {
-            list = courseMapper.selectByName(course.getName());
+        if (ObjectUtil.isNotEmpty(course.getTeacherId())) {
+            //表示当前登录的是教师角色
+            if (ObjectUtil.isNotEmpty(course.getName())) {
+                list = courseMapper.selectByNameAndTeacherId(course.getName(), course.getTeacherId());
+            } else {
+                list = courseMapper.selectAllByTeacherId(course.getTeacherId());
+            }
         } else {
-            list = courseMapper.selectAll();
+            if (ObjectUtil.isNotEmpty(course.getName())) {
+                list = courseMapper.selectByName(course.getName());
+            } else {
+                list = courseMapper.selectAll();
+            }
         }
+
         return PageInfo.of(list);
     }
 

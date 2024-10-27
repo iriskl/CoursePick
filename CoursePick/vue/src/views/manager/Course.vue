@@ -8,7 +8,7 @@
     </div>
 
     <div class="card" style="margin-bottom: 5px">
-      <div style="margin-bottom: 10px">
+      <div style="margin-bottom: 10px" v-if="data.user.role === 'ADMIN'">
         <el-button type="primary" @click="handleAdd">新增</el-button>
       </div>
       <el-table :data="data.tableData" stripe>
@@ -21,7 +21,7 @@
         <el-table-column label="上课地点" prop="location"></el-table-column>
         <el-table-column label="所属学院" prop="collegeName"></el-table-column>
         <el-table-column label="已选人数" prop="alreadyNum"></el-table-column>
-        <el-table-column label="操作" align="center" width="160">
+        <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'ADMIN'">
           <template #default="scope">
             <el-button type="primary" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
@@ -98,16 +98,19 @@ const data = reactive({
   tableData: [],
   name: null,
   collegeData: [],
-  teacherData: []
+  teacherData: [],
+  user: JSON.parse(localStorage.getItem('system-user') || '{}')
 })
 
 // 分页查询
 const load = () => {
+  let teacherId = data.user.role === 'TEACHER' ? data.user.id : null
   request.get('/course/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
-      name: data.name
+      name: data.name,
+      teacherId: teacherId
     }
   }).then(res => {
     data.tableData = res.data?.list
