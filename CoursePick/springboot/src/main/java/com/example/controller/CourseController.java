@@ -24,6 +24,7 @@ public class CourseController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Course course) {
+        course.setAlreadyNum(0);
         courseService.add(course);
         return Result.success();
     }
