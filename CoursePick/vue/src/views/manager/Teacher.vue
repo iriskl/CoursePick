@@ -21,6 +21,7 @@
         <el-table-column label="名称" prop="name"></el-table-column>
         <el-table-column label="性别" prop="sex"></el-table-column>
         <el-table-column label="职称" prop="title"></el-table-column>
+        <el-table-column label="所属学院" prop="collegeName"></el-table-column>
         <el-table-column label="角色" prop="role"></el-table-column>
         <el-table-column label="操作" align="center" width="160">
           <template #default="scope">
@@ -62,6 +63,11 @@
               <el-option label="教授" value="教授"></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="所属学院" prop="collegeId">
+            <el-select v-model="data.form.collegeId" placeholder="请选择学院" style="width: 100%">
+              <el-option v-for="item in data.collegeData" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <template #footer>
       <span class="dialog-footer">
@@ -90,7 +96,8 @@ const data = reactive({
   pageNum: 1,
   pageSize: 5,
   total: 0,
-  name: null
+  name: null,
+  collegeData: []
 })
 
 const load = () => {
@@ -175,5 +182,17 @@ const handleImgSuccess = (res) => {
   data.form.avatar = res.data
 }
 
+//加载学院信息
+const loadCollege = () => {
+  request.get('/college/selectAll').then(res => {
+    if (res.code === '200') {
+      data.collegeData = res.data
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
 load()
+loadCollege()
 </script>

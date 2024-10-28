@@ -14,7 +14,7 @@ public interface TeacherMapper {
     @Select("select * from teacher where username = #{username}")
     Teacher selectByUsername(String username);
 
-    @Select("select * from teacher")
+    @Select("select teacher.*, college.name as collegeName from teacher left join college on teacher.college_id = college.id")
     List<Teacher> selectAll();
 
     @Select("select * from teacher where name like concat('%', #{name}, '%')")

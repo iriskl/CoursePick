@@ -21,6 +21,7 @@
         <el-table-column label="名称" prop="name"></el-table-column>
         <el-table-column label="性别" prop="sex"></el-table-column>
         <el-table-column label="学号" prop="code"></el-table-column>
+        <el-table-column label="所属专业" prop="specialityName"></el-table-column>
         <el-table-column label="学分" prop="score"></el-table-column>
         <el-table-column label="角色" prop="role"></el-table-column>
         <el-table-column label="操作" align="center" width="160">
@@ -59,6 +60,11 @@
           <el-form-item label="学号" prop="code">
             <el-input v-model="data.form.code" autocomplete="off" placeholder="请输入学号"/>
           </el-form-item>
+          <el-form-item label="所属专业" prop="specialityId">
+            <el-select v-model="data.form.specialityId" placeholder="请选择所属专业" style="width: 100%">
+              <el-option v-for="item in data.specialityData" :key="item.id" :label="item.name" :value="item.id"></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <template #footer>
       <span class="dialog-footer">
@@ -87,7 +93,8 @@ const data = reactive({
   pageNum: 1,
   pageSize: 5,
   total: 0,
-  name: null
+  name: null,
+  specialityData: []
 })
 
 const load = () => {
@@ -172,5 +179,17 @@ const handleImgSuccess = (res) => {
   data.form.avatar = res.data
 }
 
+//加载专业信息
+const loadSpeciality = () => {
+  request.get('/speciality/selectAll').then(res => {
+    if (res.code === '200') {
+      data.specialityData = res.data
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
 load()
+loadSpeciality()
 </script>

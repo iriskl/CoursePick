@@ -5,13 +5,13 @@
 <mapper namespace="com.example.mapper.StudentMapper">
 
     <insert id="insert" parameterType="com.example.entity.Student" useGeneratedKeys="true">
-        insert into student (username, password, name, role, sex, code, college_id, score, avatar)
-        values (#{username}, #{password}, #{name}, #{role}, #{sex}, #{code}, #{collegeId}, #{score}, #{avatar})
+        insert into student (username, password, name, role, sex, code, speciality_id, score, avatar)
+        values (#{username}, #{password}, #{name}, #{role}, #{sex}, #{code}, #{specialityId}, #{score}, #{avatar})
     </insert>
 
     <update id="updateById" parameterType="com.example.entity.Student">
         update student
-        set username = #{username}, password = #{password}, name = #{name}, role = #{role}, sex = #{sex}, code = #{code}, college_id = #{collegeId}, score = #{score}, avatar = #{avatar}
+        set username = #{username}, password = #{password}, name = #{name}, role = #{role}, sex = #{sex}, code = #{code}, speciality_id = #{specialityId}, score = #{score}, avatar = #{avatar}
         where id = #{id}
     </update>
 

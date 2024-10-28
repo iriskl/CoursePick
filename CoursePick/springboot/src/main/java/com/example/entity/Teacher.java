@@ -17,12 +17,15 @@ public class Teacher extends Account {
     private String sex;
     /** 职称 */
     private String title;
-    /** 专业ID */
-    private Integer specialityId;
+    /** 学院 */
+    private Integer collegeId;
     /** 角色 */
     private String role;
     /** 头像 */
     private String avatar;
+
+    /** 学院名称 */
+    private String collegeName;
 
     @Override
     public Integer getId() {
@@ -80,12 +83,12 @@ public class Teacher extends Account {
         this.title = title;
     }
 
-    public Integer getSpecialityId() {
-        return specialityId;
+    public Integer getCollegeId() {
+        return collegeId;
     }
 
-    public void setSpecialityId(Integer specialityId) {
-        this.specialityId = specialityId;
+    public void setCollegeId(Integer collegeId) {
+        this.collegeId = collegeId;
     }
 
     @Override
@@ -106,5 +109,13 @@ public class Teacher extends Account {
     @Override
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 }

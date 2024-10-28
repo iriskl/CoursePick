@@ -21,10 +21,13 @@ public class Student extends Account {
     private String sex;
     /** 学号 */
     private String code;
-    /** 学院ID */
-    private Integer collegeId;
+    /** 专业ID */
+    private Integer specialityId;
     /** 学分 */
     private Integer score;
+
+    /** 专业名称 */
+    private String specialityName;
 
     @Override
     public Integer getId() {
@@ -102,12 +105,12 @@ public class Student extends Account {
         this.code = code;
     }
 
-    public Integer getCollegeId() {
-        return collegeId;
+    public Integer getSpecialityId() {
+        return specialityId;
     }
 
-    public void setCollegeId(Integer collegeId) {
-        this.collegeId = collegeId;
+    public void setSpecialityId(Integer specialityId) {
+        this.specialityId = specialityId;
     }
 
     public Integer getScore() {
@@ -116,5 +119,13 @@ public class Student extends Account {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String getSpecialityName() {
+        return specialityName;
+    }
+
+    public void setSpecialityName(String specialityName) {
+        this.specialityName = specialityName;
     }
 }
