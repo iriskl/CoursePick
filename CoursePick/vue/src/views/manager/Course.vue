@@ -21,10 +21,13 @@
         <el-table-column label="上课地点" prop="location"></el-table-column>
         <el-table-column label="所属学院" prop="collegeName"></el-table-column>
         <el-table-column label="已选人数" prop="alreadyNum"></el-table-column>
-        <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'ADMIN'">
-          <template #default="scope">
+        <el-table-column label="操作" align="center" width="160" v-if="data.user.role !== 'TEACHER'">
+          <template #default="scope" v-if="data.user.role === 'ADMIN'">
             <el-button type="primary" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
+          </template>
+          <template #default="scope" v-if="data.user.role === 'STUDENT'">
+            <el-button type="primary" @click="courseSelect(scope.row)" :disabled="scope.row.num === scope.row.alreadyNum">选课</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -198,6 +201,20 @@ const loadTeacher = () => {
   request.get('/teacher/selectAll').then(res => {
     if (res.code === '200') {
       data.teacherData = res.data
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
+//学生选课
+const courseSelect = (row) => {
+  let courseData = JSON.parse(JSON.stringify(row))
+  courseData.studentId = data.user.id
+  request.post('/courseSelection/add', courseData).then(res => {
+    if (res.code === '200') {
+      ElMessage.success('恭喜你选课成功！')
+      load()
     } else {
       ElMessage.error(res.msg)
     }

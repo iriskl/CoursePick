@@ -34,6 +34,7 @@
             <el-menu-item index="/college"><el-icon><OfficeBuilding /></el-icon><span>学院信息</span></el-menu-item>
             <el-menu-item index="/speciality"><el-icon><School /></el-icon><span>专业信息</span></el-menu-item>
             <el-menu-item index="/course"><el-icon><Reading /></el-icon><span>课程信息</span></el-menu-item>
+            <el-menu-item index="/courseSelection"><el-icon><DocumentChecked /></el-icon><span>选课/成绩信息</span></el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3" v-if="data.user.role === 'ADMIN'">
             <template #title>

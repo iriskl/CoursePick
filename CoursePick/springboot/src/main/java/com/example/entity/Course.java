@@ -16,6 +16,8 @@ public class Course {
     private String teacherName;//教师名称
     private String collegeName;//学院名称
 
+    private Integer studentId;//学生ID
+
     public Integer getId() {
         return id;
     }
@@ -110,5 +112,13 @@ public class Course {
 
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 }

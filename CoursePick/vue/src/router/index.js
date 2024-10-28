@@ -20,6 +20,7 @@ const router = createRouter({
         { path: 'college', component: () => import('@/views/manager/College.vue')},
         { path: 'speciality', component: () => import('@/views/manager/Speciality.vue')},
         { path: 'course', component: () => import('@/views/manager/Course.vue')},
+        { path: 'courseSelection', component: () => import('@/views/manager/CourseSelection.vue')},
       ]
     },
     { path: '/login', component: () => import('@/views/Login.vue')},
