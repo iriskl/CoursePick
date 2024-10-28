@@ -13,15 +13,20 @@
         <el-table-column label="授课教师" prop="teacherName"></el-table-column>
         <el-table-column label="学生名称" prop="studentName"></el-table-column>
         <el-table-column label="学生成绩" prop="score"></el-table-column>
-        <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'ADMIN'">
+<!--        <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'ADMIN'">
           <template #default="scope">
             <el-button type="primary" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
           </template>
-        </el-table-column>
+        </el-table-column>-->
         <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'TEACHER'">
           <template #default="scope">
-            <el-button type="primary" @click="">成绩录入</el-button>
+            <el-button type="primary" @click="scoreInput(scope.row)">成绩录入</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" align="center" width="160" v-if="data.user.role === 'STUDENT'">
+          <template #default="scope">
+            <el-button type="danger" @click="handleDelete(scope.row.id)">取消选课</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -31,7 +36,7 @@
       <el-pagination background layout="prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
     </div>
 
-    <el-dialog title="学院信息" width="40%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
+    <el-dialog title="成绩信息" width="40%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
       <el-form :model="data.form" label-width="100px" style="padding-right: 50px">
         <el-form-item label="学生成绩" prop="score">
           <el-input v-model="data.form.score" autocomplete="off" />
@@ -67,12 +72,14 @@ const data = reactive({
 // 分页查询
 const load = () => {
   let teacherId = data.user.role === 'TEACHER' ? data.user.id : null
+  let studentId = data.user.role === 'STUDENT' ? data.user.id : null
   request.get('/courseSelection/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
       name: data.name,
-      teacherId: teacherId
+      teacherId: teacherId,
+      studentId: studentId
     }
   }).then(res => {
     data.tableData = res.data?.list
@@ -126,7 +133,7 @@ const save = () => {
 
 // 删除
 const handleDelete = (id) => {
-  ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗?', '删除确认', { type: 'warning' }).then(res => {
+  ElMessageBox.confirm('取消选课操作不可撤回，您确定取消吗?', '取消确认', { type: 'warning' }).then(res => {
     request.delete('/courseSelection/deleteById/' + id).then(res => {
       if (res.code === '200') {
         load()
@@ -142,6 +149,12 @@ const handleDelete = (id) => {
 const reset = () => {
   data.name = null
   load()
+}
+
+// 成绩录入
+const scoreInput = (row) => {
+  data.form = JSON.parse(JSON.stringify(row))
+  data.formVisible = true
 }
 
 load()

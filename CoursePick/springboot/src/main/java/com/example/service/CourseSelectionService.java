@@ -51,33 +51,45 @@ public class CourseSelectionService {
     public PageInfo<CourseSelection> selectPage(CourseSelection courseSelection, Integer pageNum, Integer pageSize) {
         List<CourseSelection> list;
         PageHelper.startPage(pageNum, pageSize);
-        if (ObjectUtil.isNotEmpty(courseSelection.getTeacherId())) {
-            //表示当前登录的是教师角色
+        if (ObjectUtil.isNotEmpty(courseSelection.getStudentId())) {
+            // 说明这是学生登录进行分页查询
+            if (ObjectUtil.isNotEmpty(courseSelection.getName())) {
+                list = courseSelectionMapper.selectByNameAndStudentId(courseSelection.getName(), courseSelection.getStudentId());
+            } else {
+                list = courseSelectionMapper.selectAllByStudentId(courseSelection.getStudentId());
+            }
+        } else if (ObjectUtil.isNotEmpty(courseSelection.getTeacherId())) {
+            // 说明这是教师登录进行分页查询
             if (ObjectUtil.isNotEmpty(courseSelection.getName())) {
                 list = courseSelectionMapper.selectByNameAndTeacherId(courseSelection.getName(), courseSelection.getTeacherId());
             } else {
                 list = courseSelectionMapper.selectAllByTeacherId(courseSelection.getTeacherId());
             }
         } else {
+            // 说明这是管理员登录进行分页查询
             if (ObjectUtil.isNotEmpty(courseSelection.getName())) {
                 list = courseSelectionMapper.selectByName(courseSelection.getName());
             } else {
                 list = courseSelectionMapper.selectAll();
             }
         }
-
         return PageInfo.of(list);
     }
 
-    public void updateById(CourseSelection courseSelection) {
-        courseSelectionMapper.updateById(courseSelection);
-    }
-
     public void deleteById(Integer id) {
+        CourseSelection courseSelection = courseSelectionMapper.selectById(id);
         courseSelectionMapper.deleteById(id);
+        // 把对应的课程信息里面的已选人数-1
+        Course course = courseMapper.selectById(courseSelection.getCourseId());
+        course.setAlreadyNum(course.getAlreadyNum() - 1);
+        courseMapper.updateById(course);
     }
 
     public List<CourseSelection> selectAll() {
         return courseSelectionMapper.selectAll();
+    }
+
+    public void updateById(CourseSelection courseSelection) {
+        courseSelectionMapper.updateById(courseSelection);
     }
 }

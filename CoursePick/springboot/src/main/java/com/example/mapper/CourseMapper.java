@@ -41,4 +41,7 @@ public interface CourseMapper {
             "left join teacher on course.teacher_id = teacher.id " +
             "where teacher_id = #{teacherId}")
     List<Course> selectAllByTeacherId(@Param("teacherId") Integer teacherId);
+
+    @Select("select * from course where id = #{id}")
+    Course selectById(Integer courseId);
 }

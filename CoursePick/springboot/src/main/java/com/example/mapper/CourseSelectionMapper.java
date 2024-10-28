@@ -12,11 +12,16 @@ public interface CourseSelectionMapper {
 
     void insert(CourseSelection courseSelection);
 
-    @Select("select * from course_selection")
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id ")
     List<CourseSelection> selectAll();
 
-    @Select("select * from course_selection where name like concat('%', #{name}, '%')")
-    List<CourseSelection> selectByName(String title);
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id " +
+            "where course_selection.name like concat('%', #{name}, '%')")
+    List<CourseSelection> selectByName(String name);
 
     void updateById(CourseSelection courseSelection);
 
@@ -26,7 +31,32 @@ public interface CourseSelectionMapper {
     @Select("select * from course_selection where course_id = #{courseId} and student_id = #{studentId}")
     List<CourseSelection> selectByCourseIdAndStudentId(@Param("courseId") Integer courseId, @Param("studentId") Integer studentId);
 
-    List<CourseSelection> selectByNameAndTeacherId(String name, Integer teacherId);
 
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id " +
+            "where course_selection.name like concat('%', #{name}, '%') and student_id = #{studentId}")
+    List<CourseSelection> selectByNameAndStudentId(@Param("name") String name, @Param("studentId") Integer studentId);
+
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id " +
+            "where student_id = #{studentId}")
+    List<CourseSelection> selectAllByStudentId(Integer studentId);
+
+
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id " +
+            "where course_selection.name like concat('%', #{name}, '%') and teacher_id = #{teacherId}")
+    List<CourseSelection> selectByNameAndTeacherId(@Param("name") String name, @Param("teacherId") Integer teacherId);
+
+    @Select("select course_selection.*, teacher.name as teacherName, student.name as studentName from course_selection " +
+            "left join teacher on course_selection.teacher_id = teacher.id " +
+            "left join student on course_selection.student_id = student.id " +
+            "where teacher_id = #{teacherId}")
     List<CourseSelection> selectAllByTeacherId(Integer teacherId);
+
+    @Select("select * from course_selection where id = #{id}")
+    CourseSelection selectById(Integer id);
 }
