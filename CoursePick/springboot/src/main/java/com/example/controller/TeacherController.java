@@ -62,4 +62,13 @@ public class TeacherController {
     public Result selectAll() {
         return Result.success(teacherService.selectAll());
     }
+
+    /**
+     * 根据id查询
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Teacher teacher = teacherService.selectById(id);
+        return Result.success(teacher);
+    }
 }

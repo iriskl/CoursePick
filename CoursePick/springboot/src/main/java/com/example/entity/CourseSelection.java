@@ -2,6 +2,9 @@ package com.example.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * 选课
+ */
 public class CourseSelection {
 
     private Integer id;//主键ID

@@ -4,9 +4,11 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.entity.Course;
 import com.example.entity.CourseSelection;
+import com.example.entity.Student;
 import com.example.exception.CustomException;
 import com.example.mapper.CourseMapper;
 import com.example.mapper.CourseSelectionMapper;
+import com.example.mapper.StudentMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -25,6 +27,8 @@ public class CourseSelectionService {
     private CourseSelectionMapper courseSelectionMapper;
     @Resource
     private CourseMapper courseMapper;
+    @Resource
+    private StudentMapper studentMapper;
 
     public void add(Course course) {
         // 1. 先判断这个课程有没有满员
@@ -46,6 +50,10 @@ public class CourseSelectionService {
         // 4. 该门课的已选人数要+1
         course.setAlreadyNum(course.getAlreadyNum() + 1);
         courseMapper.updateById(course);
+        // 5. 该学生学分要+该门课的学分
+        Student student = studentMapper.selectById(course.getStudentId());
+        student.setScore(student.getScore() + course.getScore());
+        studentMapper.updateById(student);
     }
 
     public PageInfo<CourseSelection> selectPage(CourseSelection courseSelection, Integer pageNum, Integer pageSize) {
@@ -83,6 +91,10 @@ public class CourseSelectionService {
         Course course = courseMapper.selectById(courseSelection.getCourseId());
         course.setAlreadyNum(course.getAlreadyNum() - 1);
         courseMapper.updateById(course);
+        // 把对应的学生信息里面的学分-该门课的学分
+        Student student = studentMapper.selectById(courseSelection.getStudentId());
+        student.setScore(student.getScore() - course.getScore());
+        studentMapper.updateById(student);
     }
 
     public List<CourseSelection> selectAll() {

@@ -1,5 +1,8 @@
 package com.example.entity;
 
+/**
+ * 课程
+ */
 public class Course {
 
     private Integer id;//主键ID

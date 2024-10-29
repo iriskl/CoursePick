@@ -1,5 +1,8 @@
 package com.example.entity;
 
+/**
+ * 学院
+ */
 public class College {
 
     private Integer id;

@@ -23,7 +23,6 @@ public class Teacher extends Account {
     private String role;
     /** 头像 */
     private String avatar;
-
     /** 学院名称 */
     private String collegeName;
 

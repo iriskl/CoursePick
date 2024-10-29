@@ -1,7 +1,7 @@
 package com.example.entity;
 
 /**
- * 通知
+ * 公告通知
  */
 
 public class Notice {

@@ -20,12 +20,11 @@
             <el-option label="女" value="女"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="职称" prop="title">
-          <el-select v-model="data.user.title" placeholder="请选择职称" style="width: 100%">
-            <el-option label="讲师" value="讲师"></el-option>
-            <el-option label="副教授" value="副教授"></el-option>
-            <el-option label="教授" value="教授"></el-option>
-          </el-select>
+        <el-form-item label="职称">
+          <el-input v-model="data.user.title" autocomplete="off" disabled="false"/>
+        </el-form-item>
+        <el-form-item label="学院">
+          <el-input v-model="data.user.collegeName" autocomplete="off" disabled="false"/>
         </el-form-item>
         <div style="text-align: center">
           <el-button type="primary" @click="save">保存</el-button>
@@ -65,6 +64,20 @@ const save = () => {
     }
   })
 }
+
+const loadTeacher = () => {
+  let user = JSON.parse(localStorage.getItem('system-user') || '{}')
+  request.get('/teacher/selectById/' + user.id).then(res => {
+    if (res.code === '200') {
+      data.user = res.data
+      localStorage.setItem('system-user', JSON.stringify(res.data))
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
+loadTeacher()
 </script>
 
 <style scoped>

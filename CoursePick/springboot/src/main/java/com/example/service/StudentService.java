@@ -108,4 +108,8 @@ public class StudentService {
             throw new CustomException("密码错误");
         }
     }
+
+    public Student selectById(Integer id) {
+        return studentMapper.selectById(id);
+    }
 }

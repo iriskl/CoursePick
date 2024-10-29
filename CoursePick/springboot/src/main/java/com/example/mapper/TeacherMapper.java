@@ -24,4 +24,9 @@ public interface TeacherMapper {
 
     @Delete("delete from teacher where id = #{id}")
     void deleteById(Integer id);
+
+    @Select("select teacher.*, college.name as collegeName from teacher " +
+            "left join college on teacher.college_id = college.id " +
+            "where teacher.id = #{id}")
+    Teacher selectById(Integer id);
 }

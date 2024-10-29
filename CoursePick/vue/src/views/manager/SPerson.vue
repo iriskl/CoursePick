@@ -23,8 +23,8 @@
         <el-form-item label="学号">
           <el-input v-model="data.user.code" autocomplete="off" disabled="false"/>
         </el-form-item>
-        <el-form-item label="学院">
-          <el-input v-model="data.user.collegeName" autocomplete="off" disabled="false"/>
+        <el-form-item label="专业">
+          <el-input v-model="data.user.specialityName" autocomplete="off" disabled="false"/>
         </el-form-item>
         <el-form-item label="学分">
           <el-input v-model="data.user.score" autocomplete="off" disabled="false"/>
@@ -47,6 +47,7 @@ const uploadUrl = import.meta.env.VITE_BASE_URL + '/files/upload'
 
 const data = reactive({
   user: JSON.parse(localStorage.getItem('system-user') || '{}'),
+
 })
 
 const handleFileUpload = (file) => {
@@ -67,6 +68,20 @@ const save = () => {
     }
   })
 }
+
+const loadStudent = () => {
+  let user = JSON.parse(localStorage.getItem('system-user') || '{}')
+  request.get('/student/selectById/' + user.id).then(res => {
+    if (res.code === '200') {
+      data.user = res.data
+      localStorage.setItem('system-user', JSON.stringify(res.data))
+    } else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
+
+loadStudent()
 </script>
 
 <style scoped>

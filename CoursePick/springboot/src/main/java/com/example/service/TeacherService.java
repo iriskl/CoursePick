@@ -101,4 +101,8 @@ public class TeacherService {
     public List<Teacher> selectAll() {
         return teacherMapper.selectAll();
     }
+
+    public Teacher selectById(Integer id) {
+        return teacherMapper.selectById(id);
+    }
 }

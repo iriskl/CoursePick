@@ -54,4 +54,13 @@ public class StudentController {
         PageInfo<Student> pageInfo = studentService.selectPage(student, pageNum, pageSize);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 根据id查询
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Student student = studentService.selectById(id);
+        return Result.success(student);
+    }
 }

@@ -25,7 +25,6 @@ public class Student extends Account {
     private Integer specialityId;
     /** 学分 */
     private Integer score;
-
     /** 专业名称 */
     private String specialityName;
 
