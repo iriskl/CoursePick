@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@volar/language-server": "2.4.0-alpha.18",
+    "@vue/language-server": "2.0.28"
+  }
+}
